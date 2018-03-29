@@ -33,7 +33,7 @@ const User = mongoose.model("user", new mongoose.Schema({
 //   }
 // });
 
-// User.update({ user: "ccfine" }, { $set:{ age: 23 } }, (err, doc) => {
+// User.update({ user: "ccfine" }, { $set: { age: 23 } }, (err, doc) => {
 //   if (err) {
 //     console.log(err);
 //   } else {
