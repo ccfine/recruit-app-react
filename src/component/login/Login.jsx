@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Logo from "component/logo/Logo.jsx";
-import { List, InputItem, WingBlank, WhiteSpace, Button } from "antd-mobile";
+import { WingBlank, List, InputItem, WhiteSpace, Button } from "antd-mobile";
 
 export default class Login extends Component {
   handleRegister () {
@@ -13,7 +13,7 @@ export default class Login extends Component {
         <WingBlank>
           <List>
             <InputItem>用户名</InputItem>
-            <InputItem>密码</InputItem>
+            <InputItem type="password">密码</InputItem>
           </List>
           <WhiteSpace />
           <Button type="primary">登录</Button>

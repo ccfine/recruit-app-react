@@ -3,8 +3,8 @@ import ReactDom from "react-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
-import Welcome from "component/welcome/Welcome.jsx";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AuthRoute from "component/authRoute/AuthRoute.jsx";
 import Login from "component/login/Login.jsx";
 import Register from "component/register/Register.jsx";
 import NotFound from "component/notFound/NotFound.jsx";
@@ -21,12 +21,14 @@ let store = createStore(reducer, compose(
 ReactDom.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={ Welcome }></Route>
-        <Route path="/login" component={ Login }></Route>
-        <Route path="/register" component={ Register }></Route>
-        <Route path="/:location" component={ NotFound }></Route>
-      </Switch>
+      <div>
+        <AuthRoute></AuthRoute>
+        <Switch>
+          <Route path="/login" component={ Login }></Route>
+          <Route path="/register" component={ Register }></Route>
+          <Route path="/:location" component={ NotFound }></Route>
+        </Switch>
+      </div>
     </BrowserRouter>
   </Provider>
   ,
