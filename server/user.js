@@ -2,27 +2,23 @@ const express = require("express");
 const model = require("./model.js");
 
 const Router = express.Router();
-const User = model.getName("user");
+const User = model.getModel("user");
 
-Router.get("./list", (req, res) => {
+Router.get("/list", (req, res) => {
   User.find({}, (err, doc) => {
     return res.json(doc);
   });
 });
 
 Router.post("/register", (req, res) => {
-  const { User, pwd, type } = req.body;
-  User.findOne({ user: user }, (err, doc) => {
+  const { user, pwd, type } = req.body;
+  User.findOne({ user }, (err, doc) => {
     if (err) {
       return res.json({ success: false, msg: "查询数据出错了！" });
     } else if (doc) {
       return res.json({ success: false, msg: "用户名重复，请重新输入！" });
     } else {
-      User.create({
-        user: user,
-        pwd: pwd,
-        type: type
-      }, (err, doc) => {
+      User.create({ user, pwd, type }, (err, doc) => {
         if (err) {
           return res.json({ success: false, msg: "录入数据出错了！" });
         } else {

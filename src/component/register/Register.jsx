@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import Logo from "component/logo/Logo.jsx";
 import { WingBlank, List, InputItem, Radio, WhiteSpace, Button } from "antd-mobile";
+import { connect } from "react-redux";
+import { register } from "action/user.action.js";
+
+@connect(
+  state => state.user,
+  { register }
+)
 
 export default class Register extends Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
       user: "",
       pwd: "",
-      rePwd: "",
       type: "worker"
     }
   }
@@ -18,7 +24,7 @@ export default class Register extends Component {
     })
   }
   handleRegister () {
-    
+    this.props.register(this.state);
   }
   render () {
     const RadioItem = Radio.RadioItem;
