@@ -18,7 +18,7 @@ export default class Register extends Component {
       type: "worker"
     }
   }
-  handleChange (key, value) {
+   handleChange (key, value) {
     this.setState({
       [key]: value
     })

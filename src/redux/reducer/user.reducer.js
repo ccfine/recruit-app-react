@@ -1,7 +1,7 @@
 import { REGISTER_SUCCESS, ERROR_MSG } from "action/user.action.js";
 
 const initState = {
-  isAuth: false,
+  isLogin: false,
   user: "",
   pwd: "",
   type: ""
