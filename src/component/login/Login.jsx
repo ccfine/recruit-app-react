@@ -18,7 +18,7 @@ export default class Login extends Component {
           <WhiteSpace />
           <Button type="primary">登录</Button>
           <WhiteSpace />
-          <Button type="primary" onClick={this.handleRegister.bind(this)}>注册</Button>
+          <Button type="primary" onClick={ this.handleRegister.bind(this) }>注册</Button>
         </WingBlank>
       </div> 
     );

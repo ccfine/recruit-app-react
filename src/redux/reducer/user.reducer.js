@@ -12,7 +12,7 @@ export const user = (state=initState, action) => {
     case ERROR_MSG:
       return state;
     case REGISTER_SUCCESS:
-      return {...state, ...action.data };
+      return { ...state, ...action.data };
     default:
       return state;
   }
