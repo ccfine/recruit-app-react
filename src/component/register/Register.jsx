@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Logo from "component/logo/Logo.jsx";
 import { WingBlank, List, InputItem, Radio, WhiteSpace, Button } from "antd-mobile";
 import { connect } from "react-redux";
@@ -10,15 +11,15 @@ import { register } from "action/user.action.js";
 )
 
 export default class Register extends Component {
-  constructor (props) {
-    super(props);
+  constructor () {
+    super();
     this.state = {
       user: "",
       pwd: "",
       type: "worker"
     }
   }
-   handleChange (key, value) {
+  handleChange (key, value) {
     this.setState({
       [key]: value
     })
@@ -28,8 +29,13 @@ export default class Register extends Component {
   }
   render () {
     const RadioItem = Radio.RadioItem;
+    let redirect = null;
+    if (this.props.redirectTo) {
+      redirect = <Redirect to={ this.props.redirectTo } />;
+    }
     return (     
       <div>
+        { redirect }
         <Logo></Logo>
         <WingBlank>
           <List>
