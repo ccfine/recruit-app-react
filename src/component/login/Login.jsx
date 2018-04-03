@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import Logo from "component/logo/Logo.jsx";
 import { WingBlank, List, InputItem, WhiteSpace, Button } from "antd-mobile";
-import { login } from "action/user.action.js";
+import Logo from "component/logo/Logo.jsx";
+import { changeRegister } from "action/register.action.js";
+import { login } from "action/login.action.js";
 
 @connect(
-  state => state.user,
-  { login }
+  state => state.login,
+  { changeRegister, login }
 )
 
 export default class Login extends Component {
@@ -27,12 +28,24 @@ export default class Login extends Component {
     this.props.login(this.state);
   }
   handleRegister () {
+    this.props.changeRegister();
     this.props.history.push("/register");
   }
   render () {
     let redirect = null;
-    if (this.props.redirectTo) {
-      redirect = <Redirect to={ this.props.redirectTo } />;
+    let url = "";
+    if (this.props.type) {
+      if (this.props.type === "boss") {
+        url = "/boss";
+      } else if (this.props.type === "worker") {
+        url = "/worker";
+      }
+    }
+    if (!this.props.photo) {
+      url += "info";
+    }
+    if (this.props.isLogin) {
+      redirect = <Redirect to={ url } />;
     }
     return (
       <div>

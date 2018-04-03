@@ -1,22 +1,27 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
+import { loginValidate } from "action/login.action.js";
 
 @withRouter
+@connect(
+  null,
+  { loginValidate }
+)
+
 export default class AuthRoute extends Component {
   componentDidMount () {
     if (this.props.location.pathname !== "/register") {
       axios.get("/user/info")
         .then((res) => {
-          if (res.status === 200) {
-            if (res.data.code === 0) {
-              if (this.props.location.pathname !== "/login") {
-                this.props.history.push("/login");  
-              }
-            } else {
-              if (this.props.location.pathname === "/login") {
-                            
-              }
+          if (res.status === 200 && res.data.success) {
+            if (this.props.location.pathname === "/login") {
+              this.props.loginValidate(res.data.data, res.data.msg);
+            }
+          } else {
+            if (this.props.location.pathname !== "/login") {
+              this.props.history.push("/login");  
             }
           }
         });

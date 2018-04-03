@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import Logo from "component/logo/Logo.jsx";
-import { WingBlank, List, InputItem, Radio, WhiteSpace, Button } from "antd-mobile";
 import { connect } from "react-redux";
-import { register } from "action/user.action.js";
+import { Redirect } from "react-router-dom";
+import { WingBlank, List, InputItem, Radio, WhiteSpace, Button } from "antd-mobile";
+import Logo from "component/logo/Logo.jsx";
+import { register } from "action/register.action.js";
 
 @connect(
-  state => state.user,
+  state => state.register,
   { register }
 )
 
@@ -30,8 +30,8 @@ export default class Register extends Component {
   render () {
     const RadioItem = Radio.RadioItem;
     let redirect = null;
-    if (this.props.redirectTo) {
-      redirect = <Redirect to={ this.props.redirectTo } />;
+    if (this.props.isRegister) {
+      redirect = <Redirect to="/login" />;
     }
     return (     
       <div>
