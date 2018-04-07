@@ -9,10 +9,10 @@ const collections = {
     "pwd": { type: String, require: true },
     "type": { type: String, require: true },
     "photo": { type: String },
-    "desc": { type: String },
-    "job": { type: String }, 
     "company": { type: String },
-    "money": { type: String }
+    "job": { type: String },
+    "money": { type: String },
+    "desc": { type: String }    
   }
 };
 

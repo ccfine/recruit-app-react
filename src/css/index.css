@@ -1,9 +1,9 @@
 * {
   box-sizing: border-box;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 html {
-  font-size: 12px;
+  font-size: 10px;
 }
 body, div, h1 {
   margin: 0;
