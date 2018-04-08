@@ -12,7 +12,7 @@ Router.get("/list", (req, res) => {
   });
 });
 
-Router.get("/info", (req, res) => {
+Router.get("/validate", (req, res) => {
   const { userId } = req.cookies;
   if (!userId) {
     return res.json({ success: false, msg: "没有登录" });
@@ -60,6 +60,15 @@ Router.post("/register", (req, res) => {
       });
     }
   });
+});
+
+Router.post("/improve", (req, res) => {
+  const { userId } = req.cookies;
+  if (!userId) {
+    return res.json({ success: false, isLogin: false, msg: "没有登录，请重新登录！" });
+  } else {
+
+  }
 });
 
 //md5给密码加密

@@ -4,9 +4,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import AuthRoute from "component/authRoute/AuthRoute.jsx";
-import Login from "component/login/Login.jsx";
-import Register from "component/register/Register.jsx";
+import AuthRoute from "container/authRoute/AuthRoute.jsx";
+import Login from "container/login/Login.jsx";
+import Register from "container/register/Register.jsx";
+import BossInfo from "container/bossInfo/BossInfo.jsx";
 import NotFound from "component/notFound/NotFound.jsx";
 import reducer from "./redux/reducer.js";
 import "css/index.css";
@@ -26,6 +27,7 @@ ReactDom.render(
         <Switch>
           <Route path="/login" component={ Login }></Route>
           <Route path="/register" component={ Register }></Route>   
+          <Route path="/bossinfo" component={ BossInfo }></Route>   
           <Route path="/:location" component={ NotFound }></Route>              
         </Switch>
       </div>
