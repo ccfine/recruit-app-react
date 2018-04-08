@@ -6,8 +6,8 @@ export const IMPROVE_INFO_SUCCESS = "IMPROVE_INFO_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const IMPROVE_INFO_ERROR = "IMPROVE_INFO_ERROR";
 
-const improveInfoSuccess = (msg) => {
-  return { type: IMPROVE_INFO_SUCCESS, msg: msg };
+const improveInfoSuccess = (data, msg) => {
+  return { type: IMPROVE_INFO_SUCCESS, data: data, msg: msg };
 };
 
 const LoginError = (msg) => {
@@ -25,8 +25,9 @@ export const improveInfo = (data) => {
       .then((res) => {
         if (res.status === 200 && res.data.success) {
           layer.msg(res.data.msg);
+          console.log(res.data.data)
           setTimeout(() => {
-            dispatch(improveInfoSuccess(res.data.msg));            
+            dispatch(improveInfoSuccess(res.data.data, res.data.msg));            
           }, 2000);
         } else if (!res.data.success && !res.data.login) {
           layer.msg(res.data.msg, { shift: 6 });

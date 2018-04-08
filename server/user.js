@@ -67,7 +67,19 @@ Router.post("/improve", (req, res) => {
   if (!userId) {
     return res.json({ success: false, isLogin: false, msg: "没有登录，请重新登录！" });
   } else {
-
+    User.findByIdAndUpdate(userId, req.body, (err, doc) => {
+      if (err) {
+        return res.json({ success: false, msg: "查询数据出错！" });
+      } else if (!doc) {
+        return res.json({ success: false, isLogin: false, msg: "该用户不存在！" });
+      } else {
+        const data = Object.assign({}, {
+          user: doc.user,
+          type: doc.type
+        }, req.body);
+        return res.json({ success: true, msg: "完善信息成功", data: data }); 
+      }       
+    });
   }
 });
 

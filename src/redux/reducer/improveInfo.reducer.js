@@ -4,13 +4,20 @@ import { RE_LOGIN_SUCCESS } from "action/login.action.js";
 const initState = {
   isLogin: true,
   isImprove: false,
+  user: "",
+  type: "",
+  photo: "",
+  company: "",
+  job: "",
+  money: "",
+  desc: "",
   msg: ""
 };
 
 export const improveInfo = (state=initState, action) => {
   switch (action.type) {
     case IMPROVE_INFO_SUCCESS:
-      return { ...state, isImprove: true, msg: action.msg };
+      return { ...state, isImprove: true, ...action.data, msg: action.msg };
     case LOGIN_ERROR:
       return { ...state, isLogin: false, msg: action.msg };
     case RE_LOGIN_SUCCESS:
