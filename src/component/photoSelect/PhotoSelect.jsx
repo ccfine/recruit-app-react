@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { List, Grid } from "antd-mobile";
 
 export default class PhotoSelect extends Component {
+  static PropTypes = {
+    onSelect: PropTypes.func.isRequired
+  }
   constructor () {
     super();
     this.state = {

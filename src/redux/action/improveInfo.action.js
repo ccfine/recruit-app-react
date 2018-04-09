@@ -25,7 +25,6 @@ export const improveInfo = (data) => {
       .then((res) => {
         if (res.status === 200 && res.data.success) {
           layer.msg(res.data.msg);
-          console.log(res.data.data)
           setTimeout(() => {
             dispatch(improveInfoSuccess(res.data.data, res.data.msg));            
           }, 2000);
