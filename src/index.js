@@ -9,6 +9,7 @@ import Login from "container/login/Login.jsx";
 import Register from "container/register/Register.jsx";
 import BossInfo from "container/bossInfo/BossInfo.jsx";
 import WorkerInfo from "container/workerInfo/WorkerInfo.jsx";
+import Home from "container/home/Home.jsx";
 import NotFound from "component/notFound/NotFound.jsx";
 import reducer from "./redux/reducer.js";
 import "css/index.css";
@@ -21,7 +22,7 @@ let store = createStore(reducer, compose(
 ));
 
 ReactDom.render(
-  <Provider store={store}>
+  <Provider store={ store }>
     <BrowserRouter>
       <div>
         <AuthRoute></AuthRoute>
@@ -30,7 +31,8 @@ ReactDom.render(
           <Route path="/register" component={ Register }></Route>   
           <Route path="/bossinfo" component={ BossInfo }></Route>   
           <Route path="/workerinfo" component={ WorkerInfo }></Route>   
-          <Route path="/:location" component={ NotFound }></Route>              
+          <Route path="/home" component={ Home }></Route>
+          <Route component={ NotFound }></Route>              
         </Switch>
       </div>
     </BrowserRouter>

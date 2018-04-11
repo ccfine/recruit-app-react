@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { List, Grid } from "antd-mobile";
 
 export default class PhotoSelect extends Component {
-  static PropTypes = {
+  static propTypes = {
     onSelect: PropTypes.func.isRequired
   }
   constructor () {
