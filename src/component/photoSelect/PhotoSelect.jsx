@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, Grid } from "antd-mobile";
+import "css/global.css";
 
 export default class PhotoSelect extends Component {
   static propTypes = {
@@ -31,7 +32,7 @@ export default class PhotoSelect extends Component {
       gridHeader = <div>请选择头像:</div>;
     }
     return (
-      <div>
+      <div className="margin-top-45">
         <List renderHeader={ () => gridHeader }>
           <Grid data={ photoList } columnNum={ 5 } onClick={ (value) => this.handleSelectPhoto(value) }></Grid>        
         </List>

@@ -16,9 +16,7 @@ export default class AuthRoute extends Component {
       axios.get("/user/validate")
         .then((res) => {
           if (res.status === 200 && res.data.success) {
-            if (this.props.location.pathname === "/login") {
-              this.props.loginValidateSuccess(res.data.data, res.data.msg);
-            }
+            this.props.loginValidateSuccess(res.data.data, res.data.msg);
           } else {
             if (this.props.location.pathname !== "/login") {
               this.props.history.push("/login");  

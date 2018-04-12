@@ -1,0 +1,13 @@
+:global(.nav-bar) {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+:global(.tab-bar) {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+:global(.margin-top-45) {
+  margin-top: 45px;
+}

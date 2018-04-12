@@ -7,8 +7,17 @@ const User = model.getModel("user");
 
 Router.get("/list", (req, res) => {
   // User.remove({},(err,doc)=>{});
-  User.find({}, (err, doc) => {
-    return res.json(doc);
+  const { type } = req.query;
+  User.find({ type }, { pwd: 0, __v: 0 },(err, doc) => {
+    if (err) {
+      return res.json({ success: false, msg: "查询数据出错了！" });
+    } else {
+      if (type === "worker") {
+        return res.json({ success: true, msg: "牛人列表", data: doc });
+      } else {
+        return res.json({ success: true, msg: "boss列表", data: doc });
+      }
+    }
   });
 });
 

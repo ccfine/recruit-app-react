@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import PhotoSelect from "component/photoSelect/PhotoSelect.jsx";
 import  { NavBar, List, InputItem, TextareaItem, Button, WhiteSpace } from "antd-mobile";
 import { improveInfo } from "action/improveInfo.action.js";
+import "css/global.css";
 
 @connect(
   state => state.improveInfo,
@@ -45,7 +46,9 @@ export default class BossInfo extends Component {
     return (
       <div>
         { redirect }
-        <NavBar mode="dark">BOSS完善信息页</NavBar>
+        <div className="nav-bar">
+          <NavBar mode="dark">BOSS完善信息页</NavBar>
+        </div>      
         <PhotoSelect onSelect={ this.selectPhoto.bind(this) }></PhotoSelect>
         <List>
           <InputItem onChange={ (value) => this.handleChange("company", value) }>公司名称</InputItem>

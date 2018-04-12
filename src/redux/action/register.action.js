@@ -40,6 +40,6 @@ export const register = ({ user, pwd, rePwd, type }) => {
             dispatch(registerError(res.data.msg));
           }
         });
-    }
+    };
   }
 };

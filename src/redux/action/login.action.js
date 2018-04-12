@@ -47,6 +47,6 @@ export const login = ({ user, pwd }) => {
             dispatch(loginError(res.data.msg))
           }
         });
-    }
+    };
   }
 };
