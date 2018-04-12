@@ -82,7 +82,7 @@ Router.post("/improve", (req, res) => {
       } else if (!doc) {
         return res.json({ success: false, isLogin: false, msg: "该用户不存在！" });
       } else {
-        const data = Object.assign({}, {
+        const data = Object.assign({
           user: doc.user,
           type: doc.type
         }, req.body);
