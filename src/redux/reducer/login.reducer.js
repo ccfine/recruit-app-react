@@ -1,10 +1,10 @@
 import { LOGIN_VALIDATE_SUCCESS, LOGIN_VALIDATE_ERROR, LOGIN_ERROR, LOGIN_SUCCESS } from "action/login.action.js";
+import { LOGOUT } from "action/logout.action.js";
 
 const initState = {
   isLogin: false,
   user: "",
   type: "",
-  photo: "",
   msg: ""
 };
 
@@ -18,6 +18,8 @@ export const login = (state=initState, action) => {
       return { ...state, msg: action.msg };
     case LOGIN_SUCCESS:
       return { ...state, isLogin: true, ...action.data, msg: action.msg };
+    case LOGOUT:
+      return { ...initState, isLogin: false, msg: action.msg };
     default: 
       return state;
   }
