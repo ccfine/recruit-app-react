@@ -1,12 +1,14 @@
 :global(.nav-bar) {
+  width: 100%;
   position: fixed;
   top: 0;
-  width: 100%;
+  z-index: 10;
 }
 :global(.tab-bar) {
+  width: 100%;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  z-index: 10;
 }
 :global(.margin-top-45) {
   margin-top: 45px;

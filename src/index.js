@@ -9,6 +9,7 @@ import Login from "container/login/Login.jsx";
 import Register from "container/register/Register.jsx";
 import BossInfo from "container/bossInfo/BossInfo.jsx";
 import WorkerInfo from "container/workerInfo/WorkerInfo.jsx";
+import Chat from "component/chat/Chat.jsx";
 import Home from "container/home/Home.jsx";
 import reducer from "./redux/reducer.js";
 import "css/index.css";
@@ -30,6 +31,7 @@ ReactDom.render(
           <Route path="/register" component={ Register }></Route>   
           <Route path="/bossinfo" component={ BossInfo }></Route>   
           <Route path="/workerinfo" component={ WorkerInfo }></Route>   
+          <Route path="/chat/:id" component={ Chat }></Route>
           <Route component={ Home }></Route>
         </Switch>
       </div>

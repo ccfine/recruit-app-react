@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { Card } from "antd-mobile";
+
+@withRouter
 
 export default class UserCard extends Component {
   static propTypes = {
     user: PropTypes.object
   }
+  handleSwitchChart (id) {
+    this.props.history.push(`/chat/${id}`);
+  }
   render () {
     return this.props.user.photo? (
-        <Card>
+        <Card onClick={ this.handleSwitchChart.bind(this, this.props.user._id) }>
           <Card.Header thumb={ require(`../photoSelect/img/${this.props.user.photo}.png`) }
                         title={ this.props.user.user } extra={ <span>{ this.props.user.job }</span> }
           >

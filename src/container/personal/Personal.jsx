@@ -28,10 +28,6 @@ export default class Personal extends Component {
     } else {
       user = { ...this.props.improveInfo, ...this.props.login };
     }
-    let redirect = null;
-    if (!this.props.login.isLogin && !this.props.improveInfo.isLogin) {
-      redirect = <Redirect to="/login"></Redirect>;
-    }
     return user.user? (
         <div>
           <Result img={ <img src={ require(`component/photoSelect/img/${user.photo}.png`) } alt="用户头像" /> }
@@ -52,6 +48,6 @@ export default class Personal extends Component {
             <List.Item onClick={ this.handleLogout.bind(this) }>退出登录</List.Item>
           </List>
         </div>
-      ): redirect
+      ): <Redirect to="/login"></Redirect>
   }
 }
