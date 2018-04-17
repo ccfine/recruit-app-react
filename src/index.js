@@ -9,7 +9,7 @@ import Login from "container/login/Login.jsx";
 import Register from "container/register/Register.jsx";
 import BossInfo from "container/bossInfo/BossInfo.jsx";
 import WorkerInfo from "container/workerInfo/WorkerInfo.jsx";
-import Chat from "component/chat/Chat.jsx";
+import Chat from "container/chat/Chat.jsx";
 import Home from "container/home/Home.jsx";
 import reducer from "./redux/reducer.js";
 import "css/index.css";

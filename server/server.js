@@ -5,14 +5,21 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const userRouter = require("./user.js");
 
+const model = require("./model.js");
+const Chat = model.getModel("chat");
+
 //socket.io + express
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
 io.on("connection", (socket) => { 
-  socket.on("sendmsg", data => 
-    io.emit("recievemsg", data)
-  );
+  socket.on("sendmsg", data => {
+    const { from, to, content } = data;
+    const chatid = [ from, to ].sort().join("-");
+    Chat.create({ chatid, from, to, content }, (err, doc) => {
+      io.emit("recievemsg", doc);
+    });
+  });
 });
 
 app.use(cookieParser());

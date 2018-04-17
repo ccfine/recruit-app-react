@@ -12,8 +12,7 @@ import { logout } from "action/logout.action.js";
 
 export default class Personal extends Component {
   handleLogout () {
-    const alert = Modal.alert;
-    alert("注销", "确认退出登录吗？", [
+    Modal.alert("注销", "确认退出登录吗？", [
       { text: "取消" },
       { text: "确认", onPress: () => {
         cookies.erase("userId");
@@ -36,7 +35,7 @@ export default class Personal extends Component {
           </Result>
           <List renderHeader={ () => "简介" }>
             <List.Item multipleLine>
-              { user.job }
+              职位：{ user.job }
               { user.desc.split("\n").map((item, i) => 
                 <List.Item.Brief key={ i }>{ item }</List.Item.Brief>
               ) }

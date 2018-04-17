@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { List, InputItem } from "antd-mobile";
-import io from "socket.io-client";
+import { getMsgList, sendMsg, recieveMsg } from "action/chat.action.js";
 import "css/global.css";
-const socket = io("ws://localhost:9093");
+
+@connect(
+  state => state,
+  { getMsgList, sendMsg, recieveMsg }
+)
 
 export default class Chat extends Component {
   constructor () {
@@ -13,11 +18,8 @@ export default class Chat extends Component {
     };
   }
   componentDidMount () {
-    socket.on("recievemsg", data => {
-      this.setState({
-        msg: [ ...this.state.msg, data.text ]
-      });
-    });
+    this.props.getMsgList();
+    this.props.recieveMsg();
   } 
   handleChange (value) {
     this.setState({
@@ -25,7 +27,10 @@ export default class Chat extends Component {
     });
   }
   handleSubmit () {
-    socket.emit("sendmsg", { text: this.state.text });
+    const from = this.props.login._id;
+    const to = this.props.match.params.id;
+    const content = this.state.text;
+    this.props.sendMsg(from, to, content);
     this.setState({
       text: ""
     });
@@ -40,7 +45,7 @@ export default class Chat extends Component {
         </div>
         <div className="tab-bar">
         <List>
-          <InputItem placeholder="请输入"  value={ this.state.text } onChange={ value => this.handleChange(value) }
+          <InputItem placeholder="请输入" value={ this.state.text } onChange={ value => this.handleChange(value) }
                      extra={ <span onClick={ this.handleSubmit.bind(this) }>发送</span> }
           >        
           </InputItem>

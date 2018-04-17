@@ -4,22 +4,7 @@ const model = require("./model.js");
 
 const Router = express.Router();
 const User = model.getModel("user");
-
-Router.get("/list", (req, res) => {
-  // User.remove({},(err,doc)=>{});
-  const { type } = req.query;
-  User.find({ type }, { pwd: 0, __v: 0 },(err, doc) => {
-    if (err) {
-      return res.json({ success: false, msg: "查询数据出错了！" });
-    } else {
-      if (type === "worker") {
-        return res.json({ success: true, msg: "牛人列表", data: doc });
-      } else {
-        return res.json({ success: true, msg: "boss列表", data: doc });
-      }
-    }
-  });
-});
+const Chat = model.getModel("chat");
 
 Router.get("/validate", (req, res) => {
   const { userId } = req.cookies;
@@ -38,20 +23,6 @@ Router.get("/validate", (req, res) => {
   }
 });
 
-Router.post("/login", (req, res) => {
-  const { user, pwd } = req.body;
-  User.findOne({ user, pwd: md5pwd(pwd) }, { "pwd": 0, "__v": 0 }, (err, doc) => {
-    if (err) {
-      return res.json({ success: false, msg: "查询数据出错了！" });
-    } else if (!doc) {
-      return res.json({ success: false, msg: "用户名不存在或密码错误！" });
-    } else {
-      res.cookie("userId", doc._id);
-      res.json({ success: true, msg: "登录成功", data: doc });
-    }
-  });
-});
-
 Router.post("/register", (req, res) => {
   const { user, pwd, type } = req.body;
   User.findOne({ user }, (err, doc) => {
@@ -67,6 +38,20 @@ Router.post("/register", (req, res) => {
           return res.json({ success: true, msg: "注册成功" });
         }
       });
+    }
+  });
+});
+
+Router.post("/login", (req, res) => {
+  const { user, pwd } = req.body;
+  User.findOne({ user, pwd: md5pwd(pwd) }, { "pwd": 0, "__v": 0 }, (err, doc) => {
+    if (err) {
+      return res.json({ success: false, msg: "查询数据出错了！" });
+    } else if (!doc) {
+      return res.json({ success: false, msg: "用户名不存在或密码错误！" });
+    } else {
+      res.cookie("userId", doc._id);
+      res.json({ success: true, msg: "登录成功", data: doc });
     }
   });
 });
@@ -90,6 +75,33 @@ Router.post("/improve", (req, res) => {
       }       
     });
   }
+});
+
+Router.get("/userlist", (req, res) => {
+  // User.remove({},(err,doc)=>{});
+  const { type } = req.query;
+  User.find({ type }, { pwd: 0, __v: 0 },(err, doc) => {
+    if (err) {
+      return res.json({ success: false, msg: "查询数据出错了！" });
+    } else {
+      if (type === "worker") {
+        return res.json({ success: true, msg: "牛人列表", data: doc });
+      } else {
+        return res.json({ success: true, msg: "boss列表", data: doc });
+      }
+    }
+  });
+});
+
+Router.get("/msglist", (req, res) => {
+  const { userId } = req.cookies;
+  Chat.find({}, (err, doc) => {
+    if (err) {
+      return res.json({ success: false, msg: "查询数据出错了！" });
+    } else {
+      return res.json({ success: true, msg: "聊天列表", data: doc })
+    }
+  });
 });
 
 //md5给密码加密

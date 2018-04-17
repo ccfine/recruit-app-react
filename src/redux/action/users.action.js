@@ -18,7 +18,7 @@ const userListError = (msg) => {
 
 export const getUserList = (type) => {
   return dispatch => {
-    axios.get("/user/list?type=" + type)
+    axios.get("/user/userlist?type=" + type)
       .then((res) => {
         if (res.status === 200 && res.data.success) {
           if (type === "worker") {
