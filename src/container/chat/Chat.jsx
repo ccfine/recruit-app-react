@@ -1,26 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { List, InputItem } from "antd-mobile";
-import { getMsgList, sendMsg, recieveMsg } from "action/chat.action.js";
+import { NavBar, List, InputItem } from "antd-mobile";
+import { sendMsg } from "action/chat.action.js";
+import "css/global.css";
+import { Item } from "antd-mobile/lib/tab-bar";
 import "css/global.css";
 
 @connect(
   state => state,
-  { getMsgList, sendMsg, recieveMsg }
+  { sendMsg }
 )
 
 export default class Chat extends Component {
   constructor () {
     super();
     this.state = {
-      text: "",
-      msg: []
+      text: ""
     };
   }
-  componentDidMount () {
-    this.props.getMsgList();
-    this.props.recieveMsg();
-  } 
   handleChange (value) {
     this.setState({
       text: value
@@ -38,10 +35,23 @@ export default class Chat extends Component {
   render () {
     return (
       <div>
+        <NavBar mode="dark">{ this.props.match.params.id }</NavBar>
         <div>
-          { this.state.msg.map((item, index) => 
-            <p key={ index }>{ item }</p>
-          ) }
+          { this.props.chat.chatMsgs.map(msg => {
+            return msg.from === this.props.match.params.id? 
+                   (
+                    <List key={ msg._id }>
+                      <Item className="chat">{ msg.content }</Item>
+                    </List> 
+                   ):
+                   (
+                    <List key={ msg._id }>
+                      <div className="chat chat-me">
+                        <Item>{ msg.content }</Item>
+                      </div>
+                    </List>
+                   )
+          }) }
         </div>
         <div className="tab-bar">
         <List>

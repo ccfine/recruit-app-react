@@ -15,7 +15,7 @@ const io = require("socket.io")(server);
 io.on("connection", (socket) => { 
   socket.on("sendmsg", data => {
     const { from, to, content } = data;
-    const chatid = [ from, to ].sort().join("-");
+    const chatid = from + "-" + to;
     Chat.create({ chatid, from, to, content }, (err, doc) => {
       io.emit("recievemsg", doc);
     });

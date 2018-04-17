@@ -17,6 +17,7 @@ export default class NavLinkBar extends Component {
           <TabBar.Item key={ navList.path } icon={{ uri: require(`./img/${navList.icon}.png`) }}                        
                       selectedIcon={{ uri: require(`./img/${navList.icon}-active.png`) }}
                       title={ navList.text } selected={ navList.path === this.props.location.pathname }
+                      badge={ navList.path === "/message"? this.props.unread: 0 }
                       onPress={ () => this.props.history.push(navList.path) }
           >
           </TabBar.Item>

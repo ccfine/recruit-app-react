@@ -104,6 +104,8 @@ Router.get("/msglist", (req, res) => {
   });
 });
 
+// Chat.remove({},(err,doc)=>{});
+
 //md5给密码加密
 const md5pwd = (pwd) => {
   const salt = "ccfine24";

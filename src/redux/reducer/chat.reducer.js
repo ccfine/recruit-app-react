@@ -11,7 +11,7 @@ export const chat = (state=initState, action) => {
     case MSG_LIST:
       return { ...state, chatMsgs: action.data, unread: action.data.filter(msg => !msg.read).length, msg: action.msg }
     case MSG_RECIEVE:
-      return { ...state, chatMsgs: [ ...state.chatMsgs, action.data ], msg: action.msg };
+      return { ...state, chatMsgs: [ ...state.chatMsgs, action.data ], unread: state.unread + 1, msg: action.msg };
     case MSG_READ:
     default:
       return state;

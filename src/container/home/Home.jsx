@@ -7,13 +7,19 @@ import Boss from "container/boss/Boss.jsx";
 import Worker from "container/worker/Worker.jsx";
 import Message from "container/message/Message.jsx";
 import Personal from "container/personal/Personal.jsx";
+import { getMsgList, recieveMsg } from "action/chat.action.js";
 import "css/global.css";
 
 @connect(
-  state => ({ login: state.login, improveInfo: state.improveInfo })
+  state => state,
+  { getMsgList, recieveMsg }
 )
 
 export default class Home extends Component {
+  componentDidMount () {
+    this.props.getMsgList();
+    this.props.recieveMsg();
+  } 
   render () {
     const navLists = [
       {
@@ -60,7 +66,7 @@ export default class Home extends Component {
           </Switch>
         </div>
         <div className="tab-bar">
-          <NavLinkBar navLists={ navLists }></NavLinkBar>
+          <NavLinkBar navLists={ navLists } unread={ this.props.chat.unread }></NavLinkBar>
         </div>
       </div>
     );
