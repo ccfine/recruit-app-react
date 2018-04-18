@@ -16,7 +16,7 @@ export default class UserCard extends Component {
     return this.props.user.photo? (
         <Card onClick={ this.handleSwitchChat.bind(this, this.props.user._id) }>
           <Card.Header thumb={ require(`../photoSelect/img/${this.props.user.photo}.png`) }
-                        title={ this.props.user.user } extra={ <span>{ this.props.user.job }</span> }
+                       title={ this.props.user.user } extra={ <span>{ this.props.user.job }</span> }
           >
           </Card.Header>
           <Card.Body>

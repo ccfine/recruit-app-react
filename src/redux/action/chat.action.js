@@ -7,8 +7,8 @@ export const MSG_LIST = "MSG_LIST";
 export const MSG_RECIEVE = "MSG_RECIEVE";
 export const MSG_READ = "MSG_READ";
 
-const msgList = (data, msg) => {
-  return { type: MSG_LIST, data: data, msg: msg };
+const msgList = (data, users, msg) => {
+  return { type: MSG_LIST, data: data, users: users, msg: msg };
 };
 
 const msgRecieve = (data, msg) => {
@@ -20,7 +20,7 @@ export const getMsgList = () => {
     axios.get("/user/msglist")
       .then(res => {
         if (res.status === 200 && res.data.success) {
-          dispatch(msgList(res.data.data, res.data.msg));
+          dispatch(msgList(res.data.data, res.data.users, res.data.msg));
         }
       });
   };

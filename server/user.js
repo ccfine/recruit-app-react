@@ -95,11 +95,17 @@ Router.get("/userlist", (req, res) => {
 
 Router.get("/msglist", (req, res) => {
   const { userId } = req.cookies;
-  Chat.find({}, (err, doc) => {
+  let users = [];
+  User.find({}, (err, doc) => {
+    doc.forEach(item => {
+      users.push({ id: item._id, name: item.user, photo: item.photo });
+    });
+  });
+  Chat.find({ "$or": [{ from: userId }, { to: userId }] }, (err, doc) => {
     if (err) {
       return res.json({ success: false, msg: "查询数据出错了！" });
     } else {
-      return res.json({ success: true, msg: "聊天列表", data: doc })
+      return res.json({ success: true, msg: "聊天列表", data: doc, users: users })
     }
   });
 });
