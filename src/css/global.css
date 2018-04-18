@@ -13,9 +13,3 @@
 :global(.margin-top-45) {
   margin-top: 45px;
 }
-:global(.chat) {
-  padding: 10px;
-}
-:global(.chat-me) {
-  text-align: right;
-}

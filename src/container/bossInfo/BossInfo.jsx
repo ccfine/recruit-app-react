@@ -46,9 +46,7 @@ export default class BossInfo extends Component {
     return (
       <div>
         { redirect }
-        <div className="nav-bar">
-          <NavBar mode="dark">BOSS完善信息页</NavBar>
-        </div>      
+        <NavBar mode="dark" className="nav-bar">BOSS完善信息页</NavBar>   
         <PhotoSelect onSelect={ this.selectPhoto.bind(this) }></PhotoSelect>
         <List>
           <InputItem onChange={ (value) => this.handleChange("company", value) }>公司名称</InputItem>

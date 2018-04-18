@@ -17,8 +17,10 @@ import "css/global.css";
 
 export default class Home extends Component {
   componentDidMount () {
-    this.props.getMsgList();
-    this.props.recieveMsg();
+    if (this.props.chat.chatMsgs.length === 0) {
+      this.props.getMsgList();
+      this.props.recieveMsg();
+    }
   } 
   render () {
     const navLists = [
@@ -55,9 +57,7 @@ export default class Home extends Component {
     ];
     return (
       <div>
-        <div className="nav-bar">
-          <NavBar mode="dark">{ navLists.find(navList => navList.path === this.props.location.pathname).title }</NavBar>
-        </div>
+        <NavBar mode="dark" className="nav-bar">{ navLists.find(navList => navList.path === this.props.location.pathname).title }</NavBar>
         <div className="margin-top-45">
           <Switch>
             { navLists.map(navList => 

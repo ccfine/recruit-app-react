@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
     const { from, to, content } = data;
     const chatid = [ from, to ].sort().join("-");
     Chat.create({ chatid, from, to, content }, (err, doc) => {
-      io.emit("recievemsg", doc);
+      io.emit("recievemsg", Object.assign({}, doc._doc));
     });
   });
 });

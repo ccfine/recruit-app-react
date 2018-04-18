@@ -44,9 +44,7 @@ export default class WorkerInfo extends Component {
     return (
       <div>
         { redirect }
-        <div className="nav-bar">
-          <NavBar mode="dark">牛人完善信息页</NavBar>
-        </div>  
+        <NavBar mode="dark" className="nav-bar">牛人完善信息页</NavBar> 
         <PhotoSelect onSelect={ this.selectPhoto.bind(this) }></PhotoSelect>
         <List>
           <InputItem onChange={ (value) => this.handleChange("job", value) }>求职岗位</InputItem>

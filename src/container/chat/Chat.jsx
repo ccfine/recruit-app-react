@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { NavBar, List, InputItem, Icon } from "antd-mobile";
 import { getMsgList, sendMsg, recieveMsg } from "action/chat.action.js";
 import "css/global.css";
-import { Item } from "antd-mobile/lib/tab-bar";
-import "css/global.css";
 
 @connect(
   state => state,
@@ -39,25 +37,28 @@ export default class Chat extends Component {
     });
   }
   render () {
-    return (
+    const from = this.props.login._id;
+    const to = this.props.match.params.id;
+    const chatid = [ from, to ].sort().join("-");
+    const chatMsgs = this.props.chat.chatMsgs.filter(msg => msg.chatid === chatid);
+    return this.props.chat.users[this.props.match.params.id]? (
       <div>
-        <NavBar mode="dark" icon={ <Icon type="left" /> } onLeftClick={ () => this.props.history.goBack() }>
-          { this.props.chat.users.length !== 0? this.props.chat.users.find(user => user.id === this.props.match.params.id).name: null }
+        <NavBar mode="dark" icon={ <Icon type="left" /> } onLeftClick={ () => this.props.history.goBack() } className="nav-bar">
+          { this.props.chat.users[this.props.match.params.id].name }
         </NavBar>
-        <div>
-          { this.props.chat.chatMsgs.map(msg => {
-            const user = this.props.chat.users.length !== 0? this.props.chat.users.find(user => user.id === msg.from): {};
-            const photo = require(`component/photoSelect/img/${user.photo}.png`);
+        <div className="margin-top-45">
+          { chatMsgs.map(msg => {
+            const photo = require(`component/photoSelect/img/${this.props.chat.users[msg.from].photo}.png`);
             return msg.from === this.props.match.params.id? 
                    (
                     <List key={ msg._id }>
-                      <Item className="chat" thumb={ photo }>{ msg.content }</Item>
+                      <List.Item thumb={ photo }>{ msg.content }</List.Item>
                     </List> 
                    ):
                    (
                     <List key={ msg._id }>
-                      <div className="chat chat-me">
-                        <Item>{ msg.content }<img src={ photo } alt="用户自己头像" /></Item>
+                      <div>
+                        <List.Item extra={ <img src={ photo } alt="用户自己头像" /> }>{ msg.content }</List.Item>
                       </div>
                     </List>
                    )
@@ -72,6 +73,6 @@ export default class Chat extends Component {
           </List>
         </div>
       </div>
-    );
+    ): null;
   }
 }
