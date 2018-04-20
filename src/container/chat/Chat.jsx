@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavBar, List, InputItem, Icon, Grid } from "antd-mobile";
-import { getMsgList, sendMsg, recieveMsg } from "action/chat.action.js";
+import { getMsgList, sendMsg, recieveMsg, readMsg } from "action/chat.action.js";
 import "css/global.css";
 
 @connect(
   state => state,
-  { getMsgList, sendMsg, recieveMsg }
+  { getMsgList, sendMsg, recieveMsg, readMsg }
 )
 
 export default class Chat extends Component {
@@ -23,6 +23,11 @@ export default class Chat extends Component {
       this.props.recieveMsg();
     }
   } 
+  componentWillUnmount () {
+    const from = this.props.match.params.id;
+    const to = this.props.login._id;
+    this.props.readMsg(from, to);
+  }
   _resizeEmoji () {
     setTimeout(() => {
       window.dispatchEvent(new Event("resize"));

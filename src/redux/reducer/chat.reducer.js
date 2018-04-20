@@ -15,6 +15,7 @@ export const chat = (state=initState, action) => {
       const n = action.data.to === action.userid? 1 : 0;
       return { ...state, chatMsgs: [ ...state.chatMsgs, action.data ], unread: state.unread + n, msg: action.msg };
     case MSG_READ:
+      return { ...state, unread: state.unread - action.num, chatMsgs: state.chatMsgs.map(msg => ({ ...msg, read: action.from === msg.from? true: msg.read })) };
     default:
       return state;
   }

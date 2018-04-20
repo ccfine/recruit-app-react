@@ -110,6 +110,17 @@ Router.get("/msglist", (req, res) => {
   });
 });
 
+Router.post("/readmsg", (req, res) => {
+  const { from, to } = req.body;
+  Chat.update({ from, to }, { "$set": { read: true } }, { "multi": true }, (err, doc) => {
+    if (err) {
+      return res.json({ success: false, msg: "更新数据出错了！" });
+    } else {
+      return res.json({ success: true, num: doc.nModified });
+    }
+  });
+});
+
 // Chat.remove({},(err,doc)=>{});
 
 //md5给密码加密
