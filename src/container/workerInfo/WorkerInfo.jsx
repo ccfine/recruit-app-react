@@ -19,6 +19,8 @@ export default class WorkerInfo extends Component {
       job: "",
       desc: ""
     };
+    this.selectPhoto = this.selectPhoto.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
   selectPhoto (value) {
     this.setState({
@@ -45,13 +47,13 @@ export default class WorkerInfo extends Component {
       <div>
         { redirect }
         <NavBar mode="dark" className="nav-bar">牛人完善信息页</NavBar> 
-        <PhotoSelect onSelect={ this.selectPhoto.bind(this) }></PhotoSelect>
+        <PhotoSelect onSelect={ this.selectPhoto }></PhotoSelect>
         <List>
-          <InputItem onChange={ (value) => this.handleChange("job", value) }>求职岗位</InputItem>
-          <TextareaItem autoHeight title="个人简介" onChange={ (value) => this.handleChange("desc", value) }></TextareaItem>
+          <InputItem onChange={ value => this.handleChange("job", value) }>求职岗位</InputItem>
+          <TextareaItem autoHeight title="个人简介" onChange={ value => this.handleChange("desc", value) }></TextareaItem>
         </List>
         <WhiteSpace />
-        <Button type="primary" onClick={ this.handleSave.bind(this) }>保存</Button>
+        <Button type="primary" onClick={ this.handleSave }>保存</Button>
         <WhiteSpace />
       </div>
     );

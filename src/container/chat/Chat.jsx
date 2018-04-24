@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavBar, List, InputItem, Icon, Grid } from "antd-mobile";
+import QueueAnim from "rc-queue-anim";
 import { getMsgList, sendMsg, recieveMsg, readMsg } from "action/chat.action.js";
 import "css/global.css";
 
@@ -16,6 +17,8 @@ export default class Chat extends Component {
       text: "",
       showEmoji: false
     };
+    this.handleToggleEmoji = this.handleToggleEmoji.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this) ;
   }
   componentDidMount () {
     if (this.props.chat.chatMsgs.length === 0) {
@@ -71,28 +74,30 @@ export default class Chat extends Component {
           { this.props.chat.users[this.props.match.params.id].name }
         </NavBar>
         <div className="margin-top-45">
-          { chatMsgs.map(msg => {
-            const photo = require(`component/photoSelect/img/${this.props.chat.users[msg.from].photo}.png`);
-            return msg.from === this.props.match.params.id? 
-                   (
-                    <List key={ msg._id }>
-                      <List.Item thumb={ photo }>{ msg.content }</List.Item>
-                    </List> 
-                   ):
-                   (
-                    <List key={ msg._id }>
-                      <List.Item extra={ <img src={ photo } alt="用户自己头像" /> }>{ msg.content }</List.Item>
-                    </List>
-                   )
-          }) }
+          <QueueAnim delay={ 100 }>
+            { chatMsgs.map(msg => {
+              const photo = require(`component/photoSelect/img/${this.props.chat.users[msg.from].photo}.png`);
+              return msg.from === this.props.match.params.id? 
+                    (
+                      <List key={ msg._id }>
+                        <List.Item thumb={ photo }>{ msg.content }</List.Item>
+                      </List> 
+                    ):
+                    (
+                      <List key={ msg._id }>
+                        <List.Item extra={ <img src={ photo } alt="用户自己头像" /> }>{ msg.content }</List.Item>
+                      </List>
+                    )
+            }) }
+          </QueueAnim>
         </div>
         <div className="tab-bar">
           <List>
             <InputItem placeholder="请输入" value={ this.state.text } onChange={ value => this.handleChange(value) }
                        extra={ 
                           <div>
-                            <span style={{ marginRight: 10 }} onClick={ this.handleToggleEmoji.bind(this) }>😁</span>
-                            <span onClick={ this.handleSubmit.bind(this) }>发送</span>
+                            <span style={{ marginRight: 10 }} onClick={ this.handleToggleEmoji }>😁</span>
+                            <span onClick={ this.handleSubmit }>发送</span>
                           </div>                  
                         }
             >        

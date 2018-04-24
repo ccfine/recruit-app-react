@@ -11,6 +11,10 @@ import { logout } from "action/logout.action.js";
 )
 
 export default class Personal extends Component {
+  constructor () {
+    super();
+    this.handleLogout = this.handleLogout.bind(this); 
+  }
   handleLogout () {
     Modal.alert("注销", "确认退出登录吗？", [
       { text: "取消" },
@@ -44,7 +48,7 @@ export default class Personal extends Component {
           </List>
           <WhiteSpace />
           <List>
-            <List.Item onClick={ this.handleLogout.bind(this) }>退出登录</List.Item>
+            <List.Item onClick={ this.handleLogout }>退出登录</List.Item>
           </List>
         </div>
       ): <Redirect to="/login"></Redirect>

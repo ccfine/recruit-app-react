@@ -14,6 +14,11 @@ import { login } from "action/login.action.js";
 @form
 
 export default class Login extends Component {
+  constructor () {
+    super();
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+  }
   handleLogin () {
     this.props.login(this.props.state);
   }
@@ -43,13 +48,13 @@ export default class Login extends Component {
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem onChange={ (value) => this.props.handleChange("user", value) }>用户名</InputItem>
-            <InputItem type="password" onChange={ (value) => this.props.handleChange("pwd", value) } >密码</InputItem>
+            <InputItem onChange={ value => this.props.handleChange("user", value) }>用户名</InputItem>
+            <InputItem type="password" onChange={ value => this.props.handleChange("pwd", value) } >密码</InputItem>
           </List>
           <WhiteSpace />
-          <Button type="primary" onClick={ this.handleLogin.bind(this) }>登录</Button>
+          <Button type="primary" onClick={ this.handleLogin }>登录</Button>
           <WhiteSpace />
-          <Button type="primary" onClick={ this.handleRegister.bind(this) }>注册</Button>
+          <Button type="primary" onClick={ this.handleRegister }>注册</Button>
         </WingBlank>
       </div> 
     );

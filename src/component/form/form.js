@@ -5,6 +5,7 @@ export const form = (Comp) => {
     constructor () {
       super();
       this.state = {};
+      this.handleChange = this.handleChange.bind(this);
     }
     handleChange (key, value) {
       this.setState({
@@ -13,7 +14,7 @@ export const form = (Comp) => {
     }
     render () {
       return (
-        <Comp state={ this.state } handleChange={ this.handleChange.bind(this) } { ...this.props }></Comp>
+        <Comp state={ this.state } handleChange={ this.handleChange } { ...this.props }></Comp>
       );
     }
   }

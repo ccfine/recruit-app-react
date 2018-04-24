@@ -13,6 +13,10 @@ import { register } from "action/register.action.js";
 @form
 
 export default class Register extends Component {
+  constructor () {
+    super();
+    this.handleRegister = this.handleRegister.bind(this);
+  }
   componentDidMount () {
     this.props.handleChange("type", "worker");
   }
@@ -31,14 +35,14 @@ export default class Register extends Component {
         <Logo></Logo>
         <WingBlank>
           <List>
-            <InputItem onChange={ (value) => this.props.handleChange("user", value) }>用户名</InputItem>
-            <InputItem type="password" onChange={ (value) => this.props.handleChange("pwd", value) }>密码</InputItem>
-            <InputItem type="password" onChange={ (value) => this.props.handleChange("rePwd", value) }>确认密码</InputItem>
+            <InputItem onChange={ value => this.props.handleChange("user", value) }>用户名</InputItem>
+            <InputItem type="password" onChange={ value => this.props.handleChange("pwd", value) }>密码</InputItem>
+            <InputItem type="password" onChange={ value => this.props.handleChange("rePwd", value) }>确认密码</InputItem>
             <RadioItem checked={ this.props.state.type === "worker" } onChange={ () => this.props.handleChange("type", "worker") }>牛人</RadioItem>
             <RadioItem checked={ this.props.state.type === "boss" } onChange={ () => this.props.handleChange("type", "boss") }>老板</RadioItem>
           </List>
           <WhiteSpace />
-          <Button type="primary" onClick={ this.handleRegister.bind(this) }>注册</Button>
+          <Button type="primary" onClick={ this.handleRegister }>注册</Button>
         </WingBlank>
       </div> 
     );

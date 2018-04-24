@@ -47,12 +47,10 @@ export const recieveMsg = () => {
 };
 
 export const readMsg = (from, to) => {
-  return dispatch => {
-    axios.post("/user/readmsg", { from, to })
-      .then(res => {
-        if (res.status === 200 && res.data.success) {
-          dispatch(msgRead(from, res.data.num));
-        }
-      });
+  return async dispatch => {
+    const res = await axios.post("/user/readmsg", { from, to });
+    if (res.status === 200 && res.data.success) {
+      dispatch(msgRead(from, res.data.num));
+    }
   };
 };

@@ -21,6 +21,8 @@ export default class BossInfo extends Component {
       money: "",
       desc: ""
     };
+    this.selectPhoto = this.selectPhoto.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
   selectPhoto (value) {
     this.setState({
@@ -47,15 +49,15 @@ export default class BossInfo extends Component {
       <div>
         { redirect }
         <NavBar mode="dark" className="nav-bar">BOSS完善信息页</NavBar>   
-        <PhotoSelect onSelect={ this.selectPhoto.bind(this) }></PhotoSelect>
+        <PhotoSelect onSelect={ this.selectPhoto }></PhotoSelect>
         <List>
-          <InputItem onChange={ (value) => this.handleChange("company", value) }>公司名称</InputItem>
-          <InputItem onChange={ (value) => this.handleChange("job", value) }>招聘职位</InputItem>
-          <InputItem onChange={ (value) => this.handleChange("money", value) }>薪资待遇</InputItem>
-          <TextareaItem autoHeight title="职位要求" onChange={ (value) => this.handleChange("desc", value) }></TextareaItem>
+          <InputItem onChange={ value => this.handleChange("company", value) }>公司名称</InputItem>
+          <InputItem onChange={ value => this.handleChange("job", value) }>招聘职位</InputItem>
+          <InputItem onChange={ value => this.handleChange("money", value) }>薪资待遇</InputItem>
+          <TextareaItem autoHeight title="职位要求" onChange={ value => this.handleChange("desc", value) }></TextareaItem>
         </List>
         <WhiteSpace />
-        <Button type="primary" onClick={ this.handleSave.bind(this) }>保存</Button>
+        <Button type="primary" onClick={ this.handleSave }>保存</Button>
         <WhiteSpace />
       </div>
     );
