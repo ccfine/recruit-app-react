@@ -28,18 +28,16 @@ export const register = ({ user, pwd, rePwd, type }) => {
   } else if (pwd !== rePwd) {
     return registerError("两次输入密码必须一致！");
   } else {
-    return dispatch => {
-      axios.post("/user/register", { user, pwd, type })
-        .then(res => {
-          if (res.status === 200 && res.data.success) {
-            layer.msg(res.data.msg);
-            setTimeout(() => {
-              dispatch(registerSuccess(res.data.msg));
-            }, 2000);
-          } else {
-            dispatch(registerError(res.data.msg));
-          }
-        });
+    return async dispatch => {
+      const res = await axios.post("/user/register", { user, pwd, type });
+      if (res.status === 200 && res.data.success) {
+        layer.msg(res.data.msg);
+        setTimeout(() => {
+          dispatch(registerSuccess(res.data.msg));
+        }, 2000);
+      } else {
+        dispatch(registerError(res.data.msg));
+      }
     };
   }
 };

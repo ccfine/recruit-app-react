@@ -1,7 +1,18 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const path = require("path");
+import express from "express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import path from "path";
+
+import csshook from "css-modules-require-hook/preset";
+import React from "react";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import { StaticRouter } from "react-router-dom";
+import App from "../src/App.jsx";
+import reducer from "../src/redux/reducer.js";
+
+import { renderToString } from "react-dom/server";
 
 const app = express();
 const userRouter = require("./user.js");
@@ -32,7 +43,17 @@ app.use((req, res, next) => {
   if (req.url.startsWith("/user/") || req.url.startsWith("/static/")) {
     return next();
   }
-  return res.sendFile(path.resolve("build/index.html"));
+
+  let store = createStore(reducer, compose(applyMiddleware(thunk),));
+  let context = {};
+  const markup = renderToString(
+    <Provider store={ store }>
+      <StaticRouter location={ req.url } context={ context }>
+        <App></App> 
+      </StaticRouter>
+    </Provider>
+  );
+  // return res.sendFile(path.resolve("build/index.html"));
 });
 
 app.use("/", express.static(path.resolve("build")));

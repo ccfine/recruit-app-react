@@ -17,18 +17,16 @@ const userListError = (msg) => {
 };
 
 export const getUserList = (type) => {
-  return dispatch => {
-    axios.get("/user/userlist?type=" + type)
-      .then((res) => {
-        if (res.status === 200 && res.data.success) {
-          if (type === "worker") {
-            dispatch(workerList(res.data.data, res.data.msg));
-          } else {
-            dispatch(BossList(res.data.data, res.data.msg));
-          }
-        } else {
-          dispatch(userListError(res.data.msg));
-        }
-      }); 
+  return async dispatch => {
+    const res = await axios.get("/user/userlist?type=" + type);
+    if (res.status === 200 && res.data.success) {
+      if (type === "worker") {
+        dispatch(workerList(res.data.data, res.data.msg));
+      } else {
+        dispatch(BossList(res.data.data, res.data.msg));
+      }
+    } else {
+      dispatch(userListError(res.data.msg));
+    } 
   };
 };

@@ -20,23 +20,21 @@ const improveInfoError = (msg) => {
 }
 
 export const improveInfo = (data) => {
-  return dispatch => {
-    axios.post("/user/improve", data)
-      .then((res) => {
-        if (res.status === 200 && res.data.success) {
-          layer.msg(res.data.msg);
-          setTimeout(() => {
-            dispatch(improveInfoSuccess(res.data.data, res.data.msg));            
-          }, 2000);
-        } else if (!res.data.success && !res.data.login) {
-          layer.msg(res.data.msg, { shift: 6 });
-          setTimeout(() => {
-            dispatch(loginValidateError(res.data.msg));
-            dispatch(LoginError(res.data.msg));  
-          }, 2000);
-        } else {
-          dispatch(improveInfoError(res.data.msg));
-        }
-      });
+  return async dispatch => {
+    const res = await axios.post("/user/improve", data);
+    if (res.status === 200 && res.data.success) {
+      layer.msg(res.data.msg);
+      setTimeout(() => {
+        dispatch(improveInfoSuccess(res.data.data, res.data.msg));            
+      }, 2000);
+    } else if (!res.data.success && !res.data.login) {
+      layer.msg(res.data.msg, { shift: 6 });
+      setTimeout(() => {
+        dispatch(loginValidateError(res.data.msg));
+        dispatch(LoginError(res.data.msg));  
+      }, 2000);
+    } else {
+      dispatch(improveInfoError(res.data.msg));
+    }
   };
 };

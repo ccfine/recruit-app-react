@@ -34,19 +34,17 @@ export const login = ({ user, pwd }) => {
   } else if (!pwd) {
     return loginError("密码不能为空！");
   } else {
-    return dispatch => {
-      axios.post("/user/login", { user, pwd })
-        .then((res) => {
-          if (res.status === 200 && res.data.success) {
-            layer.msg(res.data.msg);
-            setTimeout(() => {
-              dispatch(reLoginSuccess(res.data.msg));              
-              dispatch(loginSuccess(res.data.data, res.data.msg));
-            }, 2000);
-          } else {
-            dispatch(loginError(res.data.msg))
-          }
-        });
+    return async dispatch => {
+      const res = await axios.post("/user/login", { user, pwd });     
+      if (res.status === 200 && res.data.success) {
+        layer.msg(res.data.msg);
+        setTimeout(() => {
+          dispatch(reLoginSuccess(res.data.msg));              
+          dispatch(loginSuccess(res.data.data, res.data.msg));
+        }, 2000);
+      } else {
+        dispatch(loginError(res.data.msg))
+      }
     };
   }
 };

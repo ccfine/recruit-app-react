@@ -20,14 +20,12 @@ const msgRead = (from, num) => {
 };
 
 export const getMsgList = () => {
-  return (dispatch, getState) => {
-    axios.get("/user/msglist")
-      .then(res => {
-        if (res.status === 200 && res.data.success) {
-          const userid = getState().login._id;
-          dispatch(msgList(res.data.data, res.data.users, userid, res.data.msg));
-        }
-      });
+  return async (dispatch, getState) => {
+    const res = await axios.get("/user/msglist");
+    if (res.status === 200 && res.data.success) {
+      const userid = getState().login._id;
+      dispatch(msgList(res.data.data, res.data.users, userid, res.data.msg));
+    }
   };
 };
 
