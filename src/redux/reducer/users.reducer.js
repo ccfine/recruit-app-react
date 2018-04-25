@@ -1,4 +1,4 @@
-import { BOSS_LIST, WORKER_LIST, USER_LIST_ERROR } from "action/users.action.js";
+import { BOSS_LIST, WORKER_LIST, USER_LIST_ERROR } from "../action/users.action.js";
 
 const initSate = {
   workers: [],

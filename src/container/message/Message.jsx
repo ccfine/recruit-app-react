@@ -26,7 +26,7 @@ export default class Message extends Component {
             const unreadNum = chat.filter(item => !item.read && item.to === this.props.login._id).length;
             return (
               <List key={ lastChat.chatid } >
-                <List.Item thumb={ require(`component/photoSelect/img/${this.props.chat.users[targetId].photo}.png`) }
+                <List.Item thumb={ require(`../../img/${this.props.chat.users[targetId].photo}.png`) }
                            extra={ <Badge text={ unreadNum }></Badge> } arrow="horizontal"
                            onClick={ () => this.props.history.push(`/chat/${targetId}`) }
                 >

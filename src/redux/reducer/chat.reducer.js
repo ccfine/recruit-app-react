@@ -1,4 +1,4 @@
-import { MSG_LIST, MSG_RECIEVE, MSG_READ } from "action/chat.action.js";
+import { MSG_LIST, MSG_RECIEVE, MSG_READ } from "../action/chat.action.js";
 
 const initState = {
   chatMsgs: [],

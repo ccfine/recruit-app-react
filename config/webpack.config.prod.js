@@ -89,13 +89,13 @@ module.exports = {
     // `web` extension prefixes have been added for better support
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
-    alias: {
-      component: path.join(__dirname, "../src/component"),
-      container: path.join(__dirname, "../src/container"),
-      action: path.join(__dirname, "../src/redux/action"),
-      reducer: path.join(__dirname, "../src/redux/reducer"),
-      css: path.join(__dirname, "../src/css")      
-    },
+    // alias: {
+    //   component: path.join(__dirname, "../src/component"),
+    //   container: path.join(__dirname, "../src/container"),
+    //   action: path.join(__dirname, "../src/redux/action"),
+    //   reducer: path.join(__dirname, "../src/redux/reducer"),
+    //   css: path.join(__dirname, "../src/css")      
+    // },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
       // This often causes confusion because we only process files within src/ with babel.

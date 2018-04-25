@@ -1,6 +1,6 @@
-import { IMPROVE_INFO_SUCCESS, LOGIN_ERROR, IMPROVE_INFO_ERROR } from "action/improveInfo.action.js";
-import { RE_LOGIN_SUCCESS } from "action/login.action.js";
-import { LOGOUT } from "action/logout.action.js";
+import { IMPROVE_INFO_SUCCESS, LOGIN_ERROR, IMPROVE_INFO_ERROR } from "../action/improveInfo.action.js";
+import { RE_LOGIN_SUCCESS } from "../action/login.action.js";
+import { LOGOUT } from "../action/logout.action.js";
 
 const initState = {
   isLogin: true,

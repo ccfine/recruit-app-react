@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, Grid } from "antd-mobile";
-import "css/global.css";
+import "../../css/global.css";
 
 export default class PhotoSelect extends Component {
   static propTypes = {
@@ -22,7 +22,7 @@ export default class PhotoSelect extends Component {
   render () {
     const photoList = "boy,girl,man,woman,bull,chick,crab,hedgehog,hippo,koala,lemur,pig,tiger,whale,zebra"
                       .split(",").map(item => ({
-                        icon: require(`./img/${item}.png`),
+                        icon: require(`../../img/${item}.png`),
                         text: item
                       }));
     let gridHeader = null;

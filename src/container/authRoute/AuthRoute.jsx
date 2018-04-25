@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { loginValidateSuccess } from "action/login.action.js";
+import { loginValidateSuccess } from "../../redux/action/login.action.js";
 
 @withRouter
 @connect(

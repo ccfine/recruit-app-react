@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavBar, List, InputItem, Icon, Grid } from "antd-mobile";
 import QueueAnim from "rc-queue-anim";
-import { getMsgList, sendMsg, recieveMsg, readMsg } from "action/chat.action.js";
-import "css/global.css";
+import { getMsgList, sendMsg, recieveMsg, readMsg } from "../../redux/action/chat.action.js";
+import "../../css/global.css";
 
 @connect(
   state => state,
@@ -76,7 +76,7 @@ export default class Chat extends Component {
         <div className="margin-top-45">
           <QueueAnim delay={ 100 }>
             { chatMsgs.map(msg => {
-              const photo = require(`component/photoSelect/img/${this.props.chat.users[msg.from].photo}.png`);
+              const photo = require(`../../img/${this.props.chat.users[msg.from].photo}.png`);
               return msg.from === this.props.match.params.id? 
                     (
                       <List key={ msg._id }>

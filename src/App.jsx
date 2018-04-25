@@ -1,16 +1,27 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import AuthRoute from "container/authRoute/AuthRoute.jsx";
-import Login from "container/login/Login.jsx";
-import Register from "container/register/Register.jsx";
-import BossInfo from "container/bossInfo/BossInfo.jsx";
-import WorkerInfo from "container/workerInfo/WorkerInfo.jsx";
-import Chat from "container/chat/Chat.jsx";
-import Home from "container/home/Home.jsx";
+import AuthRoute from "../src/container/authRoute/AuthRoute.jsx";
+import Login from "../src/container/login/Login.jsx";
+import Register from "../src/container/register/Register.jsx";
+import BossInfo from "../src/container/bossInfo/BossInfo.jsx";
+import WorkerInfo from "../src/container/workerInfo/WorkerInfo.jsx";
+import Chat from "../src/container/chat/Chat.jsx";
+import Home from "../src/container/home/Home.jsx";
 
 export default class App extends Component {
+  constructor () {
+    super();
+    this.state = {
+      hasError: false
+    };
+  }
+  componentDidCatch (err, info) {
+    this.setState({
+      hasError: true
+    });
+  }
   render () {
-    return (
+    return this.state.hasError? <img src={ require(`./img/404.jpg`) } alt="出错了页面！" />: (
       <div>
         <AuthRoute></AuthRoute>
         <Switch>

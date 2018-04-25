@@ -1,5 +1,5 @@
-import { LOGIN_VALIDATE_SUCCESS, LOGIN_VALIDATE_ERROR, LOGIN_ERROR, LOGIN_SUCCESS } from "action/login.action.js";
-import { LOGOUT } from "action/logout.action.js";
+import { LOGIN_VALIDATE_SUCCESS, LOGIN_VALIDATE_ERROR, LOGIN_ERROR, LOGIN_SUCCESS } from "../action/login.action.js";
+import { LOGOUT } from "../action/logout.action.js";
 
 const initState = {
   isLogin: false,

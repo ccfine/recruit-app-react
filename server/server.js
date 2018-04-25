@@ -1,9 +1,15 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import path from "path";
+const express = require("express");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const path = require("path");
 
 import csshook from "css-modules-require-hook/preset";
+import assethook from "asset-require-hook";
+assethook({
+  extensions: ["png"]
+});
+import staticPath from "../build/asset-manifest.json";
+import { renderToString, renderToNodeStream } from "react-dom/server";
 import React from "react";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
@@ -11,8 +17,6 @@ import { Provider } from "react-redux";
 import { StaticRouter } from "react-router-dom";
 import App from "../src/App.jsx";
 import reducer from "../src/redux/reducer.js";
-
-import { renderToString } from "react-dom/server";
 
 const app = express();
 const userRouter = require("./user.js");
@@ -44,16 +48,73 @@ app.use((req, res, next) => {
     return next();
   }
 
-  let store = createStore(reducer, compose(applyMiddleware(thunk),));
+  let store = createStore(reducer, compose(applyMiddleware(thunk)));
   let context = {};
-  const markup = renderToString(
+  // const markup = renderToString(
+  //   <Provider store={ store }>
+  //     <StaticRouter location={ req.url } context={ context }>
+  //       <App></App> 
+  //     </StaticRouter>
+  //   </Provider>
+  // );
+  // const templateHTML = `
+  //   <!DOCTYPE html>
+  //   <html lang="zh-cn">
+  //     <head>
+  //       <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  //       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+  //       <meta name="author" content="ccfine" />
+  //       <meta name="keywords" content="react,redux,react-route,node,express,mongdb" />
+  //       <title>招聘App</title>
+  //       <link rel="stylesheet" href="/${staticPath['main.css']}" />
+  //       <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  //       <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+  //     </head>
+  //     <body>
+  //       <div id="root">${markup}</div>
+
+  //       <script src="/${staticPath['main.js']}"></script>
+  //     </body>
+  //   </html>  
+  // `;
+  // return res.send(templateHTML);
+  // return res.sendFile(path.resolve("build/index.html"));
+
+  //流渲染
+  res.write(`
+  <!DOCTYPE html>
+    <html lang="zh-cn">
+      <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+        <meta name="author" content="ccfine" />
+        <meta name="keywords" content="react,redux,react-route,node,express,mongdb" />
+        <title>招聘App</title>
+        <link rel="stylesheet" href="/${staticPath['main.css']}" />
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+         <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+      </head>
+      <body>
+        <div id="root">
+  `);
+  const markupStream = renderToNodeStream(
     <Provider store={ store }>
       <StaticRouter location={ req.url } context={ context }>
         <App></App> 
       </StaticRouter>
     </Provider>
   );
-  // return res.sendFile(path.resolve("build/index.html"));
+  markupStream.pipe(res, { end: false });
+  markupStream.on("end",() => {
+    res.write(`
+          </div>     
+    
+          <script src="/${staticPath['main.js']}"></script>
+        </body>
+      </html>  
+    `);
+    res.end();
+  });
 });
 
 app.use("/", express.static(path.resolve("build")));

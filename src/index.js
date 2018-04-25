@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import reducer from "./redux/reducer.js";
-import "css/index.css";
+import "./css/index.css";
 import "./config.js";
 import registerServiceWorker from "./registerServiceWorker.js";
 
@@ -15,7 +15,7 @@ let store = createStore(reducer, compose(
   window.devToolsExtension? window.devToolsExtension(): f => f
 ));
 
-ReactDom.render(
+ReactDom.hydrate(
   <Provider store={ store }>
     <BrowserRouter>
       <App></App>

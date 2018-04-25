@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { form } from "component/form/Form.js"; 
+import { form } from "../../component/form/Form.js"; 
 import { WingBlank, List, InputItem, WhiteSpace, Button } from "antd-mobile";
-import Logo from "component/logo/Logo.jsx";
-import { changeRegister } from "action/register.action.js";
-import { login } from "action/login.action.js";
+import Logo from "../../component/logo/Logo.jsx";
+import { changeRegister } from "../../redux/action/register.action.js";
+import { login } from "../../redux/action/login.action.js";
 
 @connect(
   state => state.login,

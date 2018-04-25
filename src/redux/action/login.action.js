@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const layer = window.layer;
+// const layer = window.layer;
 export const LOGIN_VALIDATE_SUCCESS = "LOGIN_VALIDATE_SECCESS";
 export const LOGIN_VALIDATE_ERROR = "LOGIN_VALIDATE_ERROR";
 export const LOGIN_ERROR = "LOGIN_ERROR";
@@ -16,7 +16,7 @@ export const loginValidateError  = (msg) => {
 }
 
 const loginError = (msg) => {
-  layer.msg(msg, { shift: 6 });
+  // layer.msg(msg, { shift: 6 });
   return { type: LOGIN_ERROR, msg: msg };
 };
 
@@ -37,7 +37,7 @@ export const login = ({ user, pwd }) => {
     return async dispatch => {
       const res = await axios.post("/user/login", { user, pwd });     
       if (res.status === 200 && res.data.success) {
-        layer.msg(res.data.msg);
+        // layer.msg(res.data.msg);
         setTimeout(() => {
           dispatch(reLoginSuccess(res.data.msg));              
           dispatch(loginSuccess(res.data.data, res.data.msg));

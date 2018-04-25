@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Result, List, WhiteSpace, Modal } from "antd-mobile";
 import cookies from "browser-cookies";
-import { logout } from "action/logout.action.js";
+import { logout } from "../../redux/action/logout.action.js";
 
 @connect(
   state => state,
@@ -33,7 +33,7 @@ export default class Personal extends Component {
     }
     return user.user? (
         <div>
-          <Result img={ <img src={ require(`component/photoSelect/img/${user.photo}.png`) } alt="用户头像" /> }
+          <Result img={ <img src={ require(`../../img/${user.photo}.png`) } alt="用户头像" /> }
                   title={ user.user } message={ user.company? user.company: null }
           >
           </Result>

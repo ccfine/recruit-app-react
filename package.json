@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd-mobile": "^2.1.8",
+    "asset-require-hook": "^1.2.0",
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
@@ -69,8 +70,8 @@
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server": "nodemon server/server.js",
-    "server_babel": "set NODE_ENV=test&& nodemon --exec babel-node server/server.js"
+    "server_babel": "set NODE_ENV=test&& nodemon --exec babel-node server/server.js",
+    "server": "nodemon server/server.js"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -104,21 +105,6 @@
       "web.jsx",
       "jsx",
       "node"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "antd-mobile",
-          "style": "css"
-        }
-      ],
-      "transform-decorators-legacy"
     ]
   },
   "eslintConfig": {

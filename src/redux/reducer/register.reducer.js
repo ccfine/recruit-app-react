@@ -1,4 +1,4 @@
-import { REGISTER_ERROR, REGISTER_SUCCESS, CHANGE_REGISTER } from "action/register.action.js";
+import { REGISTER_ERROR, REGISTER_SUCCESS, CHANGE_REGISTER } from "../action/register.action.js";
 
 const initState = {
   isRegister: false,

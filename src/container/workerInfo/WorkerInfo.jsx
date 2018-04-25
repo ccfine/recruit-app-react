@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import PhotoSelect from "component/photoSelect/PhotoSelect.jsx";
+import PhotoSelect from "../../component/photoSelect/PhotoSelect.jsx";
 import  { NavBar, List, InputItem, TextareaItem, Button, WhiteSpace } from "antd-mobile";
-import { improveInfo } from "action/improveInfo.action.js";
-import "css/global.css";
+import { improveInfo } from "../../redux/action/improveInfo.action.js";
+import "../../css/global.css";
 
 @connect(
   state => state.improveInfo,

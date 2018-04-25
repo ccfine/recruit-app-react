@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route } from "react-router-dom"; 
+import { Switch, Route, Redirect } from "react-router-dom"; 
 import { NavBar } from "antd-mobile";
-import NavLinkBar from "component/navLinkBar/NavLinkBar.jsx";
-import Boss from "container/boss/Boss.jsx";
-import Worker from "container/worker/Worker.jsx";
-import Message from "container/message/Message.jsx";
-import Personal from "container/personal/Personal.jsx";
-import { getMsgList, recieveMsg } from "action/chat.action.js";
-import "css/global.css";
+import NavLinkBar from "../../component/navLinkBar/NavLinkBar.jsx";
+import Boss from "../boss/Boss.jsx";
+import Worker from "../worker/Worker.jsx";
+import Message from "../message/Message.jsx";
+import Personal from "../personal/Personal.jsx";
+import { getMsgList, recieveMsg } from "../../redux/action/chat.action.js";
+import "../../css/global.css";
 
 @connect(
   state => state,
@@ -55,9 +55,10 @@ export default class Home extends Component {
         icon: "personal"
       }
     ];
-    return (
+    const page = navLists.find(navList => navList.path === this.props.location.pathname);
+    return page? (
       <div>
-        <NavBar mode="dark" className="nav-bar">{ navLists.find(navList => navList.path === this.props.location.pathname).title }</NavBar>
+        <NavBar mode="dark" className="nav-bar">{ page.title }</NavBar>
         <div className="margin-top-45">
           <Switch>
             { navLists.map(navList => 
@@ -69,6 +70,6 @@ export default class Home extends Component {
           <NavLinkBar navLists={ navLists } unread={ this.props.chat.unread }></NavLinkBar>
         </div>
       </div>
-    );
+    ): <Redirect to="/message"></Redirect>;
   }
 }
