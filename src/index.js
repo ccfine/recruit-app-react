@@ -8,7 +8,6 @@ import App from "./App.jsx";
 import reducer from "./redux/reducer.js";
 import "./css/index.css";
 import "./config.js";
-import registerServiceWorker from "./registerServiceWorker.js";
 
 let store = createStore(reducer, compose(
   applyMiddleware(thunk),
@@ -24,4 +23,3 @@ ReactDom.hydrate(
   ,
   document.getElementById("root")
 );
-registerServiceWorker();
