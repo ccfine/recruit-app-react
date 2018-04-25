@@ -4,11 +4,11 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { loginValidateSuccess } from "../../redux/action/login.action.js";
 
-@withRouter
 @connect(
   null,
   { loginValidateSuccess }
 )
+@withRouter
 
 export default class AuthRoute extends Component {
   componentDidMount () {
