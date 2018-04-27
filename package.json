@@ -36,6 +36,7 @@
     "file-loader": "1.1.5",
     "fs-extra": "3.0.1",
     "html-webpack-plugin": "2.29.0",
+    "husky": "^0.14.3",
     "immutable": "^3.8.2",
     "jest": "20.0.4",
     "mongoose": "^5.0.12",
@@ -69,9 +70,10 @@
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
     "server_babel": "set NODE_ENV=test&& nodemon --exec babel-node server/server.js",
-    "server": "nodemon server/server.js"
+    "server": "nodemon server/server.js",
+    "lint": "eslint --ext .js --ext .jsx src/",
+    "precommit": "npm run lint"
   },
   "jest": {
     "collectCoverageFrom": [
