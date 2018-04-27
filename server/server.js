@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 app.use("/user", userRouter);
 
 app.use((req, res, next) => {
-  if (req.url.startsWith("/user/") || req.url.startsWith("/static/")) {
+  if (req.url.startsWith("/user") || req.url.startsWith("/static/")) {
     return next();
   }
 
