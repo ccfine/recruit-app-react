@@ -10,16 +10,16 @@ const improveInfoSuccess = (data, msg) => {
   return { type: IMPROVE_INFO_SUCCESS, data: data, msg: msg };
 };
 
-const LoginError = (msg) => {
+const LoginError = msg => {
   return { type: LOGIN_ERROR, msg: msg };
 };
 
-const improveInfoError = (msg) => {
+const improveInfoError = msg => {
   // layer.msg(msg, { shift: 6 });
   return { type: IMPROVE_INFO_ERROR, msg: msg };
 }
 
-export const improveInfo = (data) => {
+export const improveInfo = data => {
   return async dispatch => {
     const res = await axios.post("/user/improve", data);
     if (res.status === 200 && res.data.success) {

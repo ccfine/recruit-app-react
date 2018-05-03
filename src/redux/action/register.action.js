@@ -5,12 +5,12 @@ export const REGISTER_ERROR = "REGISTER_ERROR";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const CHANGE_REGISTER = "CHANGE_REGISTER";
 
-const registerError = (msg) => {
+const registerError = msg => {
   // layer.msg(msg, { shift: 6 });
   return { type: REGISTER_ERROR, msg: msg };
 };
 
-const registerSuccess = (msg) => {
+const registerSuccess = msg => {
   return { type: REGISTER_SUCCESS, msg: msg };
 }
 

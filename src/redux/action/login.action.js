@@ -11,11 +11,11 @@ export const loginValidateSuccess = (data, msg) => {
   return { type: LOGIN_VALIDATE_SUCCESS, data: data, msg: msg };
 };
 
-export const loginValidateError  = (msg) => {
+export const loginValidateError = msg => {
   return { type: LOGIN_VALIDATE_ERROR, msg: msg };
 }
 
-const loginError = (msg) => {
+const loginError = msg => {
   // layer.msg(msg, { shift: 6 });
   return { type: LOGIN_ERROR, msg: msg };
 };
@@ -24,7 +24,7 @@ const loginSuccess = (data, msg) => {
   return { type: LOGIN_SUCCESS, data: data, msg: msg };
 };
 
-const reLoginSuccess = (msg) => {
+const reLoginSuccess = msg => {
   return { type: RE_LOGIN_SUCCESS, msg: msg };
 };
 

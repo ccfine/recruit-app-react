@@ -12,11 +12,11 @@ const workerList = (data, msg) => {
   return { type: WORKER_LIST, data: data, msg: msg };
 };
 
-const userListError = (msg) => {
+const userListError = msg => {
   return { type: USER_LIST_ERROR, msg: msg };
 };
 
-export const getUserList = (type) => {
+export const getUserList = type => {
   return async dispatch => {
     const res = await axios.get("/user/userlist?type=" + type);
     if (res.status === 200 && res.data.success) {
