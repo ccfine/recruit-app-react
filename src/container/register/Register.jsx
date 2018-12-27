@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { form } from "../../component/form/Form.js"; 
+import { form } from "../../component/form/form.js"; 
 import { WingBlank, List, InputItem, Radio, WhiteSpace, Button } from "antd-mobile";
 import Logo from "../../component/logo/Logo.jsx";
 import { register } from "../../redux/action/register.action.js";

@@ -14,10 +14,10 @@ const store = createStore(reducer, compose(
   window.devToolsExtension? window.devToolsExtension(): f => f
 ));
 
-ReactDom.hydrate(
+ReactDom.render(
   <Provider store={ store }>
     <BrowserRouter>
-      <App></App>
+      <App />
     </BrowserRouter>
   </Provider>
   ,
