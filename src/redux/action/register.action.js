@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// const layer = window.layer;
+const layer = window.layer;
 export const REGISTER_ERROR = "REGISTER_ERROR";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const CHANGE_REGISTER = "CHANGE_REGISTER";
 
 const registerError = msg => {
-  // layer.msg(msg, { shift: 6 });
+  layer.msg(msg, { shift: 6 });
   return { type: REGISTER_ERROR, msg: msg };
 };
 
@@ -31,7 +31,7 @@ export const register = ({ user, pwd, rePwd, type }) => {
     return async dispatch => {
       const res = await axios.post("/user/register", { user, pwd, type });
       if (res.status === 200 && res.data.success) {
-        // layer.msg(res.data.msg);
+        layer.msg(res.data.msg);
         setTimeout(() => {
           dispatch(registerSuccess(res.data.msg));
         }, 2000);
